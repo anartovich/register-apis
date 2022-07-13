@@ -27,4 +27,6 @@ jobs:
     steps:
     # Runs a single command using the runners shell
     - name: Send greeting
-      run: echo "Hello ${{ github.event.inputs.name }} this is my ENV password ${{ secrets.MY_SECRET_PWD }}"
+      run: echo "Hello ${{ github.event.inputs.name }}!"
+    - name: Invoke API
+      run: curl -X GET -u admin:${{ secrets.MY_SECRET_PWD }} "https://phx15.demo.axway.com:8090/api/topology?serviceType=gateway" -H "accept: application/json"
