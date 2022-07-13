@@ -33,4 +33,4 @@ jobs:
       env: 
         SUPER_SECRET: ${{ secrets.MY_SECRET_PWD }}
       run: |
-        curl -X GET -u admin:"$SUPER_SECRET" "https://phx15.demo.axway.com:8090/api/topology?serviceType=gateway" -H "accept: application/json"
+        curl -X GET -u admin:$SUPER_SECRET "https://phx15.demo.axway.com:8090/api/topology?serviceType=gateway" -H "accept: application/json"
