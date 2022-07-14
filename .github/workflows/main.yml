@@ -1,6 +1,6 @@
 # This is a basic workflow that is manually triggered
 
-name: Manual workflow
+name: Deploy to APIM
 
 # Controls when the action will run. Workflow runs when manually triggered using the UI
 # or API.
@@ -8,30 +8,33 @@ on:
   workflow_dispatch:
     # Inputs the workflow accepts.
     inputs:
-      name:
+      release:
         # Friendly description to be shown in the UI instead of 'name'
-        description: 'Person to greet'
+        description: 'Release number of APIM-CLI'
         # Default value if no value is explicitly provided
-        default: 'World'
+        default: '1.12.0'
         # Input has to be provided for the workflow to run
         required: true
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
   # This workflow contains a single job called "greet"
-  greet:
+  install-cli:
     # The type of runner that the job will run on
     runs-on: ubuntu-latest
-    environment: env
-    env:
-      MY_PWD: ${{ secrets.PWD }}
 
+    # Use "environment" if you define one or more in your repo
+
+    # environment: dev
+    
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
     # Runs a single command using the runners shell
-    - name: Send greeting
-      run: echo "Hello ${{ github.event.inputs.name }}!"
-    - name: Invoke API
+    - name: Download and untar the tool
       run: |
-        curl -X GET -u admin:${{ secrets.PWD }} "https://phx15.demo.axway.com:8090/api/topology?serviceType=gateway" -H "accept: application/json"
+        wget -qO- https://github.com/Axway-API-Management-Plus/apim-cli/releases/download/${{ github.event.inputs.release }}/axway-apimcli-${{ github.event.inputs.release }}.tar.gz | tar xfz  -
+        echo "Hello ${{ github.event.inputs.release }}!"
+    - name: view files in the dir
+      run: |
+        ls -l
       
