@@ -22,8 +22,6 @@ jobs:
   greet:
     # The type of runner that the job will run on
     runs-on: ubuntu-latest
-    env:
-      MY_PWD: ${{ secrets.PWD }}
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
@@ -33,5 +31,5 @@ jobs:
     - name: Invoke API
       shell: bash
       run: |
-        curl -X GET -u admin:${{ env.MY_PWD }} "https://phx15.demo.axway.com:8090/api/topology?serviceType=gateway" -H "accept: application/json"
+        curl -X GET -u admin:${{ secrets.PWD }} "https://phx15.demo.axway.com:8090/api/topology?serviceType=gateway" -H "accept: application/json"
       
