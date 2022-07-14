@@ -2,8 +2,6 @@
 
 name: Deploy to APIM
 
-description: Deploy APIs to Axway APIM and promote them to the Amplify Platform 
-
 # Controls when the action will run. Workflow runs when manually triggered using the UI
 # or API.
 on:
