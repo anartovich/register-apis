@@ -23,8 +23,6 @@ on:
 jobs:
   # This workflow contains a single job called "greet"
   greet:
-    env:
-      MY_PWD: "changeme"
     # The type of runner that the job will run on
     runs-on: ubuntu-latest
 
@@ -36,7 +34,7 @@ jobs:
     - name: Invoke API
       shell: bash
       env:
-        NEW_VAR: "new-var"
+        MY_PWD: ${{ secrets.PWD }}
       run: |
-        curl -X GET -u admin:${{ env.MY_PWD }} ${{ env.NEW_VAR }} "https://phx15.demo.axway.com:8090/api/topology?serviceType=gateway" -H "accept: application/json"
+        curl -X GET -u admin:${{ env.MY_PWD }} "https://phx15.demo.axway.com:8090/api/topology?serviceType=gateway" -H "accept: application/json"
       
