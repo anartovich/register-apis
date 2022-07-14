@@ -33,8 +33,7 @@ jobs:
     - name: Download and untar the tool
       run: |
         wget -qO- https://github.com/Axway-API-Management-Plus/apim-cli/releases/download/${{ github.event.inputs.release }}/axway-apimcli-${{ github.event.inputs.release }}.tar.gz | tar xfz  -
-        echo "Hello ${{ github.event.inputs.release }}!"
     - name: view files in the dir
       run: |
-        ls -l
+        ls -l apim-cli-${{ github.event.inputs.release }}
       
