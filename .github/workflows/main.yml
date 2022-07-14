@@ -6,9 +6,6 @@ name: Manual workflow
 # or API.
 on:
   workflow_dispatch:
-    secrets:
-      PWD:
-        required: true
     # Inputs the workflow accepts.
     inputs:
       name:
