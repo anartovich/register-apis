@@ -29,6 +29,8 @@ jobs:
     - name: Send greeting
       run: echo "Hello ${{ github.event.inputs.name }}!"
     - name: Invoke API
+      env:
+        MY_PWD: ${{ secrets.PWD }}
       run: |
-        curl -X GET -u admin:${{ secrets.PWD }} "https://phx15.demo.axway.com:8090/api/topology?serviceType=gateway" -H "accept: application/json"
+        curl -X GET -u admin:${MY_PWD} "https://phx15.demo.axway.com:8090/api/topology?serviceType=gateway" -H "accept: application/json"
       
