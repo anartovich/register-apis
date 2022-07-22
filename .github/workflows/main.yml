@@ -36,4 +36,9 @@ jobs:
         wget -qO- https://github.com/Axway-API-Management-Plus/apim-cli/releases/download/${{ github.event.inputs.release }}/axway-apimcli-${{ github.event.inputs.release }}.tar.gz | tar xfz  -
     - name: view files in the dir
       run: |
-        apim-cli-${{ github.event.inputs.release }}/scripts/apim.sh api import -a config/petstore.json -c config/petstore-config.json -apimanagerUrl https://phx-24.demo.axway.com:8075/ -u apiadmin -p ${{ secrets.APIADMIN_PWD }}
+        export PORT=4010
+        export HOST="http://localhost:$PORT"
+        echo $(jq '.servers[0].url |= $ENV.HOST' $FILE_NAME) > $FILE_NAME
+        export USER=$(jq -r '.apiadmin' config/script-config.json)
+        export APIMANAGER=$(jq -r '.apimanager' config/script-config.json)
+        apim-cli-${{ github.event.inputs.release }}/scripts/apim.sh api import -a $FILE_NAME -c config/API-config.json -apimanagerUrl $APIMANAGER -u $USER -p ${{ secrets.APIADMIN_PWD }}

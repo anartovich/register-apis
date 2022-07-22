@@ -1,0 +1,578 @@
+{
+    "openapi": "3.0.0",
+    "x-stoplight": {
+        "id": "hblgdd394cli2"
+    },
+    "info": {
+        "title": "Account Information",
+        "version": "1.0",
+        "description": "Account Information\n https://developer.bankofamerica.com/CPODevPortal/apidocs/public/#/api/account-information",
+        "contact": {
+            "name": "Leor Brenman",
+            "email": "lbrenman99@hotmail.com",
+            "url": "https://www.leorbrenman.com"
+        },
+        "license": {
+            "url": "https://www.leorbrenman.com",
+            "name": "NA"
+        },
+        "termsOfService": "NA"
+    },
+    "servers": [
+        {
+            "url": "http://localhost:8080"
+        }
+    ],
+    "paths": {
+        "/reporting/v1/balance-inquiries/current-day": {
+            "post": {
+                "summary": "Current Day Balance Inquiry",
+                "operationId": "post-reporting-v1-balance-inquiries-current-day",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "../models/Balance-Inquiry-Response-Body.yaml"
+                                },
+                                "examples": {
+                                    "example-1": {
+                                        "value": {
+                                            "accountBalances": {
+                                                "accountNumber": "600811111111",
+                                                "balances": [
+                                                    {
+                                                        "amount": "983.97",
+                                                        "lastUpdatedDate": "2017-07-04",
+                                                        "transactionCode": "010",
+                                                        "transactionDescription": "Opening Ledger Balance"
+                                                    }
+                                                ],
+                                                "bankId": "BOFAGB22",
+                                                "currency": "EUR"
+                                            }
+                                        }
+                                    },
+                                    "example-2": {
+                                        "value": {
+                                            "accountBalances": {
+                                                "accountNumber": "600811111111",
+                                                "balances": [
+                                                    {
+                                                        "amount": "21,332.11",
+                                                        "lastUpdatedDate": "2021-07-04",
+                                                        "transactionCode": "010",
+                                                        "transactionDescription": "Opening Ledger Balance"
+                                                    }
+                                                ],
+                                                "bankId": "BOFAGB22",
+                                                "currency": "USD"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "../models/Account-Information-Error-Response-Body.yaml"
+                                },
+                                "examples": {
+                                    "example-1": {
+                                        "value": {
+                                            "apiName": "POST/reporting/v1/balance-inquiries/current-day",
+                                            "reason": {
+                                                "reasonCode": 400,
+                                                "reasonDescription": "Bad Request"
+                                            },
+                                            "status": "Failure",
+                                            "transactionIdentification": "99999990-9999-9999-9999-009099999999"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "../models/Account-Information-Error-Response-Body.yaml"
+                                },
+                                "examples": {
+                                    "example-1": {
+                                        "value": {
+                                            "apiName": "POST/cashpro/reporting/v1/balance-inquiries/current-day",
+                                            "reason": {
+                                                "reasonCode": 401,
+                                                "reasonDescription": "Authentication Failure"
+                                            },
+                                            "status": "Failure",
+                                            "transactionIdentification": "99999990-9999-9999-9999-009099999999"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "tags": [
+                    "Balance Inquiry",
+                    "Current Day",
+                    "Account Information"
+                ],
+                "description": "Current Day Balance Inquiry\n\nhttps://developer.bankofamerica.com/CPODevPortal/apidocs/public/#/api/account-information/cashpro-reporting-v1-balance-inquiries-current-day-post",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "../models/Balance-Inquiry-Request-Body.yaml"
+                            },
+                            "examples": {
+                                "example-1": {
+                                    "value": {
+                                        "accounts": [
+                                            {
+                                                "accountNumber": "601022222222",
+                                                "bankId": "BOFAFRPP"
+                                            }
+                                        ],
+                                        "balanceAsOfDate": "2017-07-04"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "description": "Current Day Balance Inquiry Request Body"
+                }
+            }
+        },
+        "/reporting/v1/funds-checks": {
+            "post": {
+                "summary": "Funds Check",
+                "tags": [
+                    "Account Information",
+                    "Funds Check"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "../models/Funds-Check-Response-Body.yaml"
+                                },
+                                "examples": {
+                                    "example-1": {
+                                        "value": {
+                                            "fundsAvailable": true
+                                        }
+                                    },
+                                    "example-2": {
+                                        "value": {
+                                            "fundsAvailable": false
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "../models/Account-Information-Error-Response-Body.yaml"
+                                },
+                                "examples": {
+                                    "example-1": {
+                                        "value": {
+                                            "apiName": "POST/reporting/v1/funds-checks",
+                                            "reason": {
+                                                "reasonCode": 400,
+                                                "reasonDescription": "Bad Request"
+                                            },
+                                            "status": "Failure",
+                                            "transactionIdentification": "99999990-9999-9999-9999-009099999999"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "../models/Account-Information-Error-Response-Body.yaml"
+                                },
+                                "examples": {
+                                    "example-1": {
+                                        "value": {
+                                            "apiName": "POST/reporting/v1/funds-checks",
+                                            "reason": {
+                                                "reasonCode": 401,
+                                                "reasonDescription": "Authentication Failure"
+                                            },
+                                            "status": "Failure",
+                                            "transactionIdentification": "99999990-9999-9999-9999-009099999999"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "operationId": "post-reporting-v1-funds-checks",
+                "description": "Queries current day account balance information to determine if the amount requested is available in the account; supports a single account for the current date. Based on https://developer.bankofamerica.com/CPODevPortal/apidocs/public/#/api/account-information/cashpro-reporting-v1-funds-checks-post",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "../models/Funds-Check-Request-Body.yaml"
+                            },
+                            "examples": {
+                                "example-1": {
+                                    "value": {
+                                        "account": {
+                                            "accountNumber": "600811111111",
+                                            "bankId": "BOFAGB22"
+                                        },
+                                        "amount": "1000.00"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "description": "Funds Check Request Body"
+                }
+            }
+        },
+        "/reporting/v1/balance-inquiries/previous-day": {
+            "post": {
+                "summary": "Previous Day Balance Inquiry",
+                "operationId": "post-reporting-v1-balance-inquiries-previous-day",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "../models/Balance-Inquiry-Response-Body.yaml"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "../models/Account-Information-Error-Response-Body.yaml"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "../models/Account-Information-Error-Response-Body.yaml"
+                                }
+                            }
+                        }
+                    }
+                },
+                "description": "Previous Day Balance Inquiry\n\nhttps://developer.bankofamerica.com/CPODevPortal/apidocs/public/#/api/account-information/cashpro-reporting-v1-balance-inquiries-previous-day-post",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "../models/Balance-Inquiry-Request-Body.yaml"
+                            }
+                        }
+                    },
+                    "description": "Previous Day Balance Inquiry Request Body"
+                },
+                "tags": [
+                    "Account Information",
+                    "Balance Inquiry",
+                    "Previous Day"
+                ]
+            }
+        },
+        "/reporting/v1/transaction-inquiries/current-day": {
+            "post": {
+                "summary": "Current Day Transaction Inquiry",
+                "operationId": "post-reporting-v1-transaction-inquiries-current-day",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "../models/Transaction-Inquiry-Response-Body.yaml"
+                                },
+                                "examples": {
+                                    "example-1": {
+                                        "value": {
+                                            "accountTransactions": {
+                                                "accountNumber": "601022222222",
+                                                "bankId": "BOFAFRPP",
+                                                "currency": "EUR",
+                                                "transactions": [
+                                                    {
+                                                        "amount": "1.00",
+                                                        "asOfDate": "2017-11-21",
+                                                        "availability1DayAmount": "string",
+                                                        "availability2PlusDayAmount": "string",
+                                                        "availabilityImmediateAmount": "string",
+                                                        "bankReference": "555555555555",
+                                                        "creditDebitIndicator": "Debit",
+                                                        "customerReference": "CUSTREF123",
+                                                        "detailText": "BENEFICIARY UNSTRUCTURED DETAIL TEXT",
+                                                        "itemCount": "1",
+                                                        "transactionCode": "400",
+                                                        "transactionDescription": "Total Debits",
+                                                        "transactionType": "Summary",
+                                                        "valueDate": "2017-11-21"
+                                                    }
+                                                ]
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "../models/Account-Information-Error-Response-Body.yaml"
+                                },
+                                "examples": {
+                                    "example-1": {
+                                        "value": {
+                                            "apiName": "POST/reporting/v1/transaction-inquiries/current-day",
+                                            "reason": {
+                                                "reasonCode": 400,
+                                                "reasonDescription": "Bad Request"
+                                            },
+                                            "status": "Failure",
+                                            "transactionIdentification": "99999990-9999-9999-9999-009099999999"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "../models/Account-Information-Error-Response-Body.yaml"
+                                },
+                                "examples": {
+                                    "example-1": {
+                                        "value": {
+                                            "apiName": "POST/reporting/v1/transaction-inquiries/current-day",
+                                            "reason": {
+                                                "reasonCode": 401,
+                                                "reasonDescription": "Authentication Failure"
+                                            },
+                                            "status": "Failure",
+                                            "transactionIdentification": "99999990-9999-9999-9999-009099999999"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "tags": [
+                    "Account Information",
+                    "Transaction Inquiry",
+                    "Current Day"
+                ],
+                "description": "Current Day Transaction Inquiry\n\nhttps://developer.bankofamerica.com/CPODevPortal/apidocs/public/#/api/account-information/cashpro-reporting-v1-transaction-inquiries-current-day-post",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "../models/Transaction-Inquiry-Request-Body.yaml"
+                            },
+                            "examples": {
+                                "example-1": {
+                                    "value": {
+                                        "accounts": [
+                                            {
+                                                "accountNumber": "601022222222",
+                                                "bankId": "BOFAFRPP"
+                                            }
+                                        ],
+                                        "fromDate": "2017-11-21",
+                                        "toDate": "2017-11-21"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "description": "Current Day Transaction Inquiry Request Body"
+                }
+            }
+        },
+        "/reporting/v1/transaction-inquiries/previous-day": {
+            "post": {
+                "summary": "Previous Day Transaction Inquiry",
+                "operationId": "post-reporting-v1-transaction-inquiries-previous-day",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "../models/Transaction-Inquiry-Response-Body.yaml"
+                                },
+                                "examples": {
+                                    "example-1": {
+                                        "value": {
+                                            "accountTransactions": {
+                                                "accountNumber": "601022222222",
+                                                "bankId": "BOFAFRPP",
+                                                "currency": "EUR",
+                                                "transactions": [
+                                                    {
+                                                        "amount": "1.00",
+                                                        "asOfDate": "2017-11-21",
+                                                        "availability1DayAmount": "string",
+                                                        "availability2PlusDayAmount": "string",
+                                                        "availabilityImmediateAmount": "string",
+                                                        "bankReference": "555555555555",
+                                                        "creditDebitIndicator": "Debit",
+                                                        "customerReference": "CUSTREF123",
+                                                        "detailText": "BENEFICIARY UNSTRUCTURED DETAIL TEXT",
+                                                        "itemCount": "1",
+                                                        "transactionCode": "400",
+                                                        "transactionDescription": "Total Debits",
+                                                        "transactionType": "Summary",
+                                                        "valueDate": "2017-11-21"
+                                                    }
+                                                ]
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "../models/Account-Information-Error-Response-Body.yaml"
+                                },
+                                "examples": {
+                                    "example-1": {
+                                        "value": {
+                                            "apiName": "POST/reporting/v1/transaction-inquiries/previous-day",
+                                            "reason": {
+                                                "reasonCode": 400,
+                                                "reasonDescription": "Bad Request"
+                                            },
+                                            "status": "Failure",
+                                            "transactionIdentification": "99999990-9999-9999-9999-009099999999"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "../models/Account-Information-Error-Response-Body.yaml"
+                                },
+                                "examples": {
+                                    "example-1": {
+                                        "value": {
+                                            "apiName": "POST/cashpro/reporting/v1/transaction-inquiries/previous-day",
+                                            "reason": {
+                                                "reasonCode": 401,
+                                                "reasonDescription": "Authentication Failure"
+                                            },
+                                            "status": "Failure",
+                                            "transactionIdentification": "99999990-9999-9999-9999-009099999999"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "tags": [
+                    "Account Information",
+                    "Transaction Query",
+                    "Previous Day"
+                ],
+                "description": "Previous Day Transaction Inquiry\n\nhttps://developer.bankofamerica.com/CPODevPortal/apidocs/public/#/api/account-information/cashpro-reporting-v1-transaction-inquiries-previous-day-post",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "../models/Transaction-Inquiry-Request-Body.yaml"
+                            },
+                            "examples": {
+                                "example-1": {
+                                    "value": {
+                                        "accounts": [
+                                            {
+                                                "accountNumber": "601022222222",
+                                                "bankId": "BOFAFRPP"
+                                            }
+                                        ],
+                                        "fromDate": "2017-11-21",
+                                        "toDate": "2017-11-21"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "description": "Previous Day Transaction Inquiry Request Body"
+                }
+            }
+        }
+    },
+    "components": {
+        "schemas": {},
+        "securitySchemes": {
+            "Authorization": {
+                "type": "http",
+                "scheme": "bearer"
+            }
+        }
+    },
+    "tags": [
+        {
+            "name": "Account Information"
+        }
+    ],
+    "security": [
+        {
+            "Authorization": []
+        }
+    ]
+}

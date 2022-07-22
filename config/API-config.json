@@ -1,9 +1,7 @@
 {
-    "name": "Petstore API",
     "path": "/demo/api/v1",
     "state": "published",
     "retirementDate": "01.09.2050",
-    "summary": "This API uses free Petstore API for testing purpose",
     "version": "1.0.0",
     "organization": "API Development"
 }
