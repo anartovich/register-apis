@@ -34,9 +34,11 @@ jobs:
     - name: Download and untar the tool
       run: |
         wget -qO- https://github.com/Axway-API-Management-Plus/apim-cli/releases/download/${{ github.event.inputs.release }}/axway-apimcli-${{ github.event.inputs.release }}.tar.gz | tar xfz  -
-    - name: view files in the dir
+    - name: Import API into API Manager
       run: |
         export FILE_NAME="Account-Information.json"
+        export API_NAME=$(jq -r .info.title $FILE_NAME)
+        echo $(jq '.name = $ENV.API_NAME' config/API-config.json) > config/API-config.json
         export PORT=4010
         export HOST="http://localhost:$PORT"
         echo $(jq '.servers[0].url |= $ENV.HOST' $FILE_NAME) > $FILE_NAME
