@@ -36,6 +36,7 @@ jobs:
         wget -qO- https://github.com/Axway-API-Management-Plus/apim-cli/releases/download/${{ github.event.inputs.release }}/axway-apimcli-${{ github.event.inputs.release }}.tar.gz | tar xfz  -
     - name: view files in the dir
       run: |
+        export FILE_NAME="Account-Information.json"
         export PORT=4010
         export HOST="http://localhost:$PORT"
         echo $(jq '.servers[0].url |= $ENV.HOST' $FILE_NAME) > $FILE_NAME
