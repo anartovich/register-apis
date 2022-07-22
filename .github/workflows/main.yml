@@ -40,6 +40,7 @@ jobs:
         export PORT=4010
         export HOST="http://localhost:$PORT"
         echo $(jq '.servers[0].url |= $ENV.HOST' $FILE_NAME) > $FILE_NAME
+        cat $FILE_NAME
         export USER=$(jq -r '.apiadmin' config/script-config.json)
         export APIMANAGER=$(jq -r '.apimanager' config/script-config.json)
         apim-cli-${{ github.event.inputs.release }}/scripts/apim.sh api import -a $FILE_NAME -c config/API-config.json -apimanagerUrl $APIMANAGER -u $USER -p ${{ secrets.APIADMIN_PWD }}
