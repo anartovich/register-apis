@@ -43,8 +43,8 @@ jobs:
         do
           export API_NAME=$(jq -r .info.title $FILE_NAME)
           echo $(jq '.name = $ENV.API_NAME' config/API-config.json) > config/API-config.json
-          export PATH_NAME=${API_NAME//[!a-z,!A-Z]}
-          echo $(jq '.path = /demoapi/v1/$ENV.PATH_NAME' config/API-config.json) > config/API-config.json
+          export PATH_NAME="/demoapi/v1/${API_NAME//[!a-z,!A-Z]}"
+          echo $(jq '.path = $ENV.PATH_NAME' config/API-config.json) > config/API-config.json
           export HOST="http://localhost:$PORT"
           echo $(jq '.servers[0].url |= $ENV.HOST' $FILE_NAME) > $FILE_NAME
           export USER=$(jq -r '.apiadmin' config/script-config.json)
