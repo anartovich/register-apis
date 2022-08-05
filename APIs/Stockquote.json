@@ -1,0 +1,60 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "description": "",
+    "version": "1.0",
+    "title": "Stockquote New",
+    "x-summary": "Get stock quote"
+  },
+  "host": "phx-24.demo.axway.com:8065",
+  "basePath": "/stockquote",
+  "schemes": ["https"],
+  "paths": {
+    "/rest": {
+      "get": {
+        "operationId": "GetQuote",
+        "produces": ["application/json"],
+        "parameters": [{
+          "name": "symbol",
+          "in": "query",
+          "description": "Company symbol",
+          "required": true,
+          "type": "string"
+        }],
+        "responses": {
+          "200": {
+            "description": "success",
+            "schema": {
+              "type": "string"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error"
+          },
+          "403": {
+            "description": "Forbidden"
+          }
+        },
+        "x-axway": {}
+      }
+    }
+  },
+  "x-axway": {
+    "serviceType": "rest",
+    "image": "/api/portal/v1.4/discovery/swagger/apis/2104224d-ddcb-448f-b950-1dd3d201d2aa/image",
+    "basePaths": ["https://phx-24.demo.axway.com:8065"],
+    "expired": false,
+    "retirementDate": 0,
+    "corsEnabled": true,
+    "deprecated": false,
+    "availableSDK": {
+      "ios-swift": "/discovery/sdk/2104224d-ddcb-448f-b950-1dd3d201d2aa/ios-swift",
+      "android": "/discovery/sdk/2104224d-ddcb-448f-b950-1dd3d201d2aa/android",
+      "nodejs": "/discovery/sdk/2104224d-ddcb-448f-b950-1dd3d201d2aa/nodejs"
+    },
+    "apiResourceType": "swagger11ex",
+    "id": "2104224d-ddcb-448f-b950-1dd3d201d2aa",
+    "state": "published",
+    "accessGrantedDate": 1556526018924
+  }
+}

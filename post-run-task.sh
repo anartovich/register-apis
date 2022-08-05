@@ -14,7 +14,7 @@ if [ "$ACTION" = "q" ] || [ "$ACTION" = "Q" ]; then
     exit 0;
 fi
 
-FILES=$(ls ./APIs/*.json)
+FILES=$(ls -S APIs/*.json)
 PORT=4010
 
 for FILE_NAME in $FILES

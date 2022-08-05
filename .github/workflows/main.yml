@@ -32,7 +32,7 @@ jobs:
         wget -qO- https://github.com/Axway-API-Management-Plus/apim-cli/releases/download/${{ env.CLI_RELEASE }}/axway-apimcli-${{ env.CLI_RELEASE }}.tar.gz | tar xfz  -
     - name: Import API into API Manager
       run: |
-        FILES=$(ls ./APIs/*.json)
+        FILES=$(ls -S ./APIs/*.json)
         PORT=4010
 
         for FILE_NAME in $FILES
