@@ -6,15 +6,11 @@ name: Deploy to APIM
 # or API.
 on:
   workflow_dispatch:
-    # Inputs the workflow accepts.
-    inputs:
-      release:
-        # Friendly description to be shown in the UI instead of 'name'
-        description: 'Release number of APIM-CLI'
-        # Default value if no value is explicitly provided
-        default: '1.12.0'
-        # Input has to be provided for the workflow to run
-        required: true
+
+# Environment variables that may be used in all jobs
+
+env:
+  CLI-RELEASE: '1.12.1'
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
@@ -33,7 +29,7 @@ jobs:
     # Runs a single command using the runners shell
     - name: Download and untar the tool
       run: |
-        wget -qO- https://github.com/Axway-API-Management-Plus/apim-cli/releases/download/${{ github.event.inputs.release }}/axway-apimcli-${{ github.event.inputs.release }}.tar.gz | tar xfz  -
+        wget -qO- https://github.com/Axway-API-Management-Plus/apim-cli/releases/download/$ENV.CLI-RELEASE/axway-apimcli-$ENV.CLI-RELEASE.tar.gz | tar xfz  -
     - name: Import API into API Manager
       run: |
         FILES=$(ls ./APIs/*.json)
@@ -50,6 +46,6 @@ jobs:
           export USER=$(jq -r '.apiadmin' config/script-config.json)
           export APIMANAGER=$(jq -r '.apimanager' config/script-config.json)
         
-          apim-cli-${{ github.event.inputs.release }}/scripts/apim.sh api import -a $FILE_NAME -c config/API-config.json -apimanagerUrl $APIMANAGER -u $USER -p ${{ secrets.APIADMIN_PWD }} -force
+          apim-cli-$ENV.CLI-RELEASE/scripts/apim.sh api import -a $FILE_NAME -c config/API-config.json -apimanagerUrl $APIMANAGER -u $USER -p ${{ secrets.APIADMIN_PWD }}
           (( PORT = PORT + 1 ))
         done
