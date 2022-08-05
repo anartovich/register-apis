@@ -29,7 +29,7 @@ jobs:
     # Runs a single command using the runners shell
     - name: Download and untar the tool
       run: |
-        wget -qO- https://github.com/Axway-API-Management-Plus/apim-cli/releases/download/'$CLI_RELEASE'/axway-apimcli-'$CLI_RELEASE'.tar.gz | tar xfz  -
+        wget -qO- https://github.com/Axway-API-Management-Plus/apim-cli/releases/download/'$env.CLI_RELEASE'/axway-apimcli-'$env.CLI_RELEASE'.tar.gz | tar xfz  -
     - name: Import API into API Manager
       run: |
         FILES=$(ls ./APIs/*.json)
