@@ -29,7 +29,7 @@ jobs:
     # Runs a single command using the runners shell
     - name: Download and untar the tool
       run: |
-        wget -qO- https://github.com/Axway-API-Management-Plus/apim-cli/releases/download/$ENV.CLI-RELEASE/axway-apimcli-$ENV.CLI-RELEASE.tar.gz | tar xfz  -
+        wget -qO- https://github.com/Axway-API-Management-Plus/apim-cli/releases/download/$CLI-RELEASE/axway-apimcli-$CLI-RELEASE.tar.gz | tar xfz  -
     - name: Import API into API Manager
       run: |
         FILES=$(ls ./APIs/*.json)
@@ -46,6 +46,6 @@ jobs:
           export USER=$(jq -r '.apiadmin' config/script-config.json)
           export APIMANAGER=$(jq -r '.apimanager' config/script-config.json)
         
-          apim-cli-$ENV.CLI-RELEASE/scripts/apim.sh api import -a $FILE_NAME -c config/API-config.json -apimanagerUrl $APIMANAGER -u $USER -p ${{ secrets.APIADMIN_PWD }}
+          apim-cli-$CLI-RELEASE/scripts/apim.sh api import -a $FILE_NAME -c config/API-config.json -apimanagerUrl $APIMANAGER -u $USER -p ${{ secrets.APIADMIN_PWD }}
           (( PORT = PORT + 1 ))
         done

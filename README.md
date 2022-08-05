@@ -35,7 +35,7 @@ Follow these steps to use this project:
 
    
 
-8. Click the **Action** tab and select **Deploy to APIM**. Click **Run workflow**. The action will prompt you for two input parameters: git branch and version of the Axway apim-cli. You can accept the default values. 
+8. Click the **Action** tab and select **Deploy to APIM**. Click **Run workflow**. The action will prompt you for an input parameters: git branch. You can accept the default values. 
 
    
 
@@ -46,9 +46,11 @@ Follow these steps to use this project:
 
    
 
-9. GitHub executes this action in a container on its cloud. It will take a minute or so to complete. Come back to this page later and check the status. If the action is successful, you should see a green checkmark (like in the image above).
+9. GitHub executes this action in a container on its cloud. It will take a minute or so to complete. Come back to this page later and check the status. If the action is successful, you should see a green checkmark (like in the image above). 
 
-10. Connect to your API Manager to confirm that APIs are regisetered.
+   Note: If the same API already registered in your API Manager, the deployment of that API will fail. You may modify the `.github/workflows/main.yml` and add the **-force** parameter at the end of the `apim-cli-$ENV.CLI-RELEASE/scripts/apim.sh` command
+
+10. Connect to your API Manager to confirm that APIs are registered.
 
 11. Now, go back to your Linux machine where you've installed Axway API Management and switch to your git repo folder.
 
@@ -60,8 +62,6 @@ Follow these steps to use this project:
 
     
 
-13. This script will deploy multiple containers of Prizm mocking server on your machine: one per API spec in the *./APIs* folder. 
+13. This script will deploy multiple containers of Prizm mocking server on your machine: one per API spec in the *`./APIs`* folder. 
 
     **Note**: make sure that you have enough resources to run Axway APIM and multiple docker containers
-
-14. 
