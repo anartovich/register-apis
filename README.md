@@ -62,6 +62,6 @@ Follow these steps to use this project:
 
     
 
-13. This script will deploy multiple containers of Prizm mocking server on your machine: one per API spec in the *`./APIs`* folder. 
+13. This script will deploy multiple containers of Prizm mocking server on your machine: one per API spec in the *`./APIs`* folder. The containers use one port per container starting with 4010.
 
     **Note**: make sure that you have enough resources to run Axway APIM and multiple docker containers
