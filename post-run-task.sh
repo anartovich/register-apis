@@ -19,6 +19,6 @@ PORT=4010
 
 for FILE_NAME in $FILES
 do
-    docker run --init --rm -p $PORT:4010 stoplight/prism:4.10.1 mock -d -h 0.0.0.0 $FILE_NAME
+    docker run --init -d --rm -v $(pwd):/tmp -p $PORT:4010 stoplight/prism:4.10.1 mock -d -h 0.0.0.0 "/tmp/$FILE_NAME"
     (( PORT = PORT + 1 ))
 done
