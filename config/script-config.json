@@ -1,4 +1,4 @@
 {
-    "apimanager": "https://phx-24.demo.axway.com:8075/",
+    "apimanager": "https://your.server.com:8075/",
     "apiadmin": "apiadmin"
 }

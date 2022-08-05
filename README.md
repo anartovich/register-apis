@@ -35,7 +35,9 @@ Follow these steps to use this project:
 
    
 
-8. Click the **Action** tab and select **Deploy to APIM**. Click **Run workflow**. The action will prompt you for an input parameters: git branch. You can accept the default values. 
+8. Click the **Action** tab. You will need to click the Enable actions link. 
+
+9. Select **Deploy to APIM**. Click **Run workflow**. The action will prompt you for an input parameters: git branch. You can accept the default values and click Run workflow in the pop-up window.
 
    
 
@@ -46,22 +48,23 @@ Follow these steps to use this project:
 
    
 
-9. GitHub executes this action in a container on its cloud. It will take a minute or so to complete. Come back to this page later and check the status. If the action is successful, you should see a green checkmark (like in the image above). 
+10. GitHub executes this action in a container on its cloud. It will take a minute or so to complete. Come back to this page later and check the status. If the action is successful, you should see a green checkmark (like in the image above). 
 
    Note: If the same API already registered in your API Manager, the deployment of that API will fail. You may modify the `.github/workflows/main.yml` and add the **-force** parameter at the end of the `apim-cli-$ENV.CLI-RELEASE/scripts/apim.sh` command
 
-10. Connect to your API Manager to confirm that APIs are registered.
+11. Connect to your API Manager to confirm that APIs are registered.
 
-11. Now, go back to your Linux machine where you've installed Axway API Management and switch to your git repo folder.
+12. Now, go back to your Linux machine where you've installed Axway API Management and switch to your git repo folder.
 
-12. Execute the following command from within this folder
+13. Execute the following commands from within this folder
 
     ```bash
+    $ chmod +x post-run-task.sh
     $ ./post-run-task.sh
     ```
 
     
 
-13. This script will deploy multiple containers of Prizm mocking server on your machine: one per API spec in the *`./APIs`* folder. The containers use one port per container starting with 4010.
+14. This script will deploy multiple containers of Prizm mocking server on your machine: one per API spec in the *`./APIs`* folder. The containers use one port per container starting with 4010.
 
     **Note**: make sure that you have enough resources to run Axway APIM and multiple docker containers
