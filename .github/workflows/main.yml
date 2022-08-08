@@ -45,6 +45,7 @@ jobs:
           echo $(jq '.backendBasepath = $ENV.HOST' config/API-config.json) > config/API-config.json
           export USER=$(jq -r '.apiadmin' config/script-config.json)
           export APIMANAGER=$(jq -r '.apimanager' config/script-config.json)
+          echo $(cat $FILE_NAME | jq 'del(.components.securitySchemes)') > $FILE_NAME
         
           apim-cli-${{ env.CLI_RELEASE }}/scripts/apim.sh api import -a $FILE_NAME -c config/API-config.json -apimanagerUrl $APIMANAGER -u $USER -p ${{ secrets.APIADMIN_PWD }}
           (( PORT = PORT + 1 ))
