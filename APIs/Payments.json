@@ -1,0 +1,640 @@
+{
+  "openapi": "3.0.0",
+  "x-stoplight": {
+    "id": "gw76dvbs8qrqb"
+  },
+  "info": {
+    "title": "Payments",
+    "version": "1.0",
+    "contact": {
+      "name": "Leor Brenman",
+      "email": "lbrenman99@hotmail.com",
+      "url": "https://www.leorbrenman.com"
+    },
+    "termsOfService": "NA",
+    "license": {
+      "name": "NA",
+      "url": "https://www.leorbrenman.com"
+    },
+    "description": "Payments\n\nhttps://developer.bankofamerica.com/CPODevPortal/apidocs/public/#/api/payments"
+  },
+  "servers": [
+    {
+      "url": "http://localhost:8080",
+      "description": "Leor Brenman"
+    }
+  ],
+  "paths": {
+    "/payments/v2/payment-initiations": {
+      "post": {
+        "summary": "Payments V2 Initiation",
+        "operationId": "post-payments-v2-payment-initiations",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "x-stoplight": {
+                    "id": "31b8e0bfa2112"
+                  },
+                  "additionalProperties": false,
+                  "properties": {
+                    "Reason": {
+                      "type": "array",
+                      "minItems": 0,
+                      "maxItems": 1,
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "reasonCode": {
+                            "type": "string",
+                            "x-faker": "finance.routingNumber"
+                          },
+                          "reasonDescription": {
+                            "type": "string",
+                            "enum": [
+                              "Beneficiary Email Address is Required",
+                              "Invalid transaction status for cancel"
+                            ]
+                          }
+                        }
+                      }
+                    },
+                    "endToEndIdentification": {
+                      "type": "string",
+                      "x-faker": "finance.iban"
+                    },
+                    "paymentStatus": {
+                      "type": "string",
+                      "enum": [
+                        "Rejected By Bank"
+                      ]
+                    },
+                    "transactionIdentification": {
+                      "type": "string",
+                      "x-faker": "finance.iban"
+                    }
+                  },
+                  "description": "Payments V2 Initiation Response Body (Initiation ,Status)",
+                  "x-tags": [
+                    "Payments Initiation"
+                  ]
+                },
+                "examples": {
+                  "example-1": {
+                    "value": {
+                      "Reason": [
+                        {
+                          "reasonCode": "CP212",
+                          "reasonDescription": "Beneficiary Email Address is Required"
+                        }
+                      ],
+                      "endToEndIdentification": "SenderRefSIT18",
+                      "paymentStatus": "Rejected By Bank",
+                      "transactionIdentification": "1234567890ABC"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "endToEndIdentification": {
+                      "type": "string"
+                    },
+                    "paymentStatus": {
+                      "type": "string"
+                    },
+                    "reason": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "reasonCode": {
+                            "type": "string"
+                          },
+                          "reasonDescription": {
+                            "type": "string"
+                          }
+                        }
+                      }
+                    },
+                    "transactionIdentification": {
+                      "type": "string"
+                    }
+                  },
+                  "description": "Payments V2 Initiation Error 400 Response Body  ",
+                  "x-tags": [
+                    "Payments Initiation"
+                  ]
+                },
+                "examples": {
+                  "example-1": {
+                    "value": {
+                      "endToEndIdentification": "USRTP12345",
+                      "paymentStatus": "Rejected By Bank",
+                      "reason": [
+                        {
+                          "reasonCode": "DU04",
+                          "reasonDescription": "Duplicate transaction 'd98a81e2-fc83-4157-9bd1' found associated with given end to end ID"
+                        }
+                      ],
+                      "transactionIdentification": "596780be-67a5-4fdb-a922-061fbce44233"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "apiName": {
+                      "type": "string"
+                    },
+                    "reason": {
+                      "type": "object",
+                      "properties": {
+                        "reasonCode": {
+                          "type": "integer"
+                        },
+                        "reasonDescription": {
+                          "type": "string"
+                        }
+                      }
+                    },
+                    "status": {
+                      "type": "string"
+                    },
+                    "transactionIdentification": {
+                      "type": "string"
+                    }
+                  },
+                  "description": "Payments V2 Initiation Error 401 Response Body (Initiation, Status)",
+                  "x-tags": [
+                    "Payments Initiation"
+                  ]
+                },
+                "examples": {
+                  "example-1": {
+                    "value": {
+                      "apiName": " POST/payments/v2/payment-initiations",
+                      "reason": {
+                        "reasonCode": 401,
+                        "reasonDescription": "Authentication Failure"
+                      },
+                      "status": "Failure",
+                      "transactionIdentification": "99999990-9999-9999-9999-009099999999"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Payments",
+          "Initiation"
+        ],
+        "description": "Payments V2 Initiation",
+        "parameters": [
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "header",
+            "name": "X-Idempotency-Key",
+            "description": "A unique identifier to be used for a single payment. Length: 1 - 256",
+            "required": true
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "x-stoplight": {
+                  "id": "31b8e0bfa2112"
+                },
+                "properties": {
+                  "amount": {
+                    "type": "object",
+                    "properties": {
+                      "value": {
+                        "type": "string"
+                      }
+                    }
+                  },
+                  "creditor": {
+                    "type": "object",
+                    "properties": {
+                      "contactDetails": {
+                        "type": "object",
+                        "properties": {
+                          "emailAddress": {
+                            "type": "string"
+                          }
+                        }
+                      },
+                      "name": {
+                        "type": "string"
+                      },
+                      "postalAddress": {
+                        "type": "object",
+                        "properties": {
+                          "addressLine": {
+                            "type": "array",
+                            "items": {
+                              "type": "string"
+                            }
+                          },
+                          "city": {
+                            "type": "string"
+                          },
+                          "country": {
+                            "type": "string"
+                          }
+                        }
+                      }
+                    }
+                  },
+                  "creditorAccount": {
+                    "type": "object",
+                    "properties": {
+                      "currency": {
+                        "type": "string"
+                      }
+                    }
+                  },
+                  "debtor": {
+                    "type": "object",
+                    "properties": {
+                      "contactDetails": {
+                        "type": "object",
+                        "properties": {
+                          "emailAddress": {
+                            "type": "string"
+                          }
+                        }
+                      },
+                      "identifiers": {
+                        "type": "array",
+                        "items": {
+                          "type": "object",
+                          "properties": {
+                            "identification": {
+                              "type": "string"
+                            },
+                            "issuer": {
+                              "type": "string"
+                            },
+                            "schemeName": {
+                              "type": "string"
+                            }
+                          }
+                        }
+                      },
+                      "name": {
+                        "type": "string"
+                      }
+                    }
+                  },
+                  "debtorAccount": {
+                    "type": "object",
+                    "properties": {
+                      "currency": {
+                        "type": "string"
+                      },
+                      "identification": {
+                        "type": "string"
+                      }
+                    }
+                  },
+                  "debtorAgent": {
+                    "type": "object",
+                    "properties": {
+                      "institution": {
+                        "type": "object",
+                        "properties": {
+                          "identification": {
+                            "type": "string"
+                          }
+                        }
+                      }
+                    }
+                  },
+                  "instructionForCreditorAgent": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  },
+                  "paymentIdentification": {
+                    "type": "object",
+                    "properties": {
+                      "endToEndIdentification": {
+                        "type": "string"
+                      }
+                    }
+                  },
+                  "paymentType": {
+                    "type": "object",
+                    "properties": {
+                      "localInstrument": {
+                        "type": "string"
+                      }
+                    }
+                  },
+                  "requestedExecutionDate": {
+                    "type": "string"
+                  },
+                  "unstructuredRemittance": {
+                    "type": "string"
+                  }
+                },
+                "description": "Payments V2 Initiation Request Body  ",
+                "x-tags": [
+                  "Payments Initiation"
+                ]
+              },
+              "examples": {
+                "example-1": {
+                  "value": {
+                    "amount": {
+                      "value": "1.01"
+                    },
+                    "creditor": {
+                      "contactDetails": {
+                        "emailAddress": "you@creditor.com"
+                      },
+                      "name": "Creditor Name",
+                      "postalAddress": {
+                        "addressLine": [
+                          "Address 1",
+                          "Address 2"
+                        ],
+                        "city": "City",
+                        "country": "US"
+                      }
+                    },
+                    "creditorAccount": {
+                      "currency": "CAD"
+                    },
+                    "debtor": {
+                      "contactDetails": {
+                        "emailAddress": "me@debtor.com"
+                      },
+                      "identifiers": [
+                        {
+                          "identification": "identification",
+                          "issuer": "issuer",
+                          "schemeName": "BRANDING"
+                        }
+                      ],
+                      "name": "Debtor Name"
+                    },
+                    "debtorAccount": {
+                      "currency": "CAD",
+                      "identification": "71141234567890"
+                    },
+                    "debtorAgent": {
+                      "institution": {
+                        "identification": "BOFACATT"
+                      }
+                    },
+                    "instructionForCreditorAgent": [
+                      "SQ1:qazwsxedcrfv",
+                      "SA1:edcwsxqaz",
+                      "RPL:EN"
+                    ],
+                    "paymentIdentification": {
+                      "endToEndIdentification": "InteracTest1"
+                    },
+                    "paymentType": {
+                      "localInstrument": "INTERAC"
+                    },
+                    "requestedExecutionDate": "2021-12-06",
+                    "unstructuredRemittance": "Interac Test 1"
+                  }
+                }
+              }
+            }
+          },
+          "description": "Payments V2 Initiation Request Body"
+        }
+      }
+    },
+    "/payments/v2/payment-initiations/status": {
+      "get": {
+        "summary": "Payments V2 Status",
+        "operationId": "get-payments-v2-payment-initiations-status",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "x-stoplight": {
+                    "id": "31b8e0bfa2112"
+                  },
+                  "additionalProperties": false,
+                  "properties": {
+                    "Reason": {
+                      "type": "array",
+                      "minItems": 0,
+                      "maxItems": 1,
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "reasonCode": {
+                            "type": "string",
+                            "x-faker": "finance.routingNumber"
+                          },
+                          "reasonDescription": {
+                            "type": "string",
+                            "enum": [
+                              "Beneficiary Email Address is Required",
+                              "Invalid transaction status for cancel"
+                            ]
+                          }
+                        }
+                      }
+                    },
+                    "endToEndIdentification": {
+                      "type": "string",
+                      "x-faker": "finance.iban"
+                    },
+                    "paymentStatus": {
+                      "type": "string",
+                      "enum": [
+                        "Rejected By Bank"
+                      ]
+                    },
+                    "transactionIdentification": {
+                      "type": "string",
+                      "x-faker": "finance.iban"
+                    }
+                  },
+                  "description": "Payments V2 Initiation Response Body (Initiation ,Status)",
+                  "x-tags": [
+                    "Payments Initiation"
+                  ]
+                },
+                "examples": {
+                  "example-1": {
+                    "value": {
+                      "endToEndIdentification": "SenderRefSIT18",
+                      "paymentStatus": "Rejected By Bank",
+                      "reason": [
+                        {
+                          "reasonCode": "CP700",
+                          "reasonDescription": "Invalid transaction status for cancel"
+                        }
+                      ],
+                      "transactionIdentification": "1234567890ABC"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "reason": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "reasonCode": {
+                            "type": "string"
+                          },
+                          "reasonDescription": {
+                            "type": "string"
+                          }
+                        }
+                      }
+                    },
+                    "requestId": {
+                      "type": "null"
+                    },
+                    "rfiId": {
+                      "type": "string"
+                    },
+                    "transactionIdentification": {
+                      "type": "string"
+                    }
+                  },
+                  "x-tags": [
+                    "Payment Status"
+                  ]
+                },
+                "examples": {
+                  "example-1": {
+                    "value": {
+                      "reason": [
+                        {
+                          "reasonCode": "CP401",
+                          "reasonDescription": "Invalid element in request"
+                        }
+                      ],
+                      "requestId": null,
+                      "rfiId": "SITEportalTESTING022371",
+                      "transactionIdentification": "A0JALX03YQTC6NII"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "apiName": {
+                      "type": "string"
+                    },
+                    "reason": {
+                      "type": "object",
+                      "properties": {
+                        "reasonCode": {
+                          "type": "integer"
+                        },
+                        "reasonDescription": {
+                          "type": "string"
+                        }
+                      }
+                    },
+                    "status": {
+                      "type": "string"
+                    },
+                    "transactionIdentification": {
+                      "type": "string"
+                    }
+                  },
+                  "description": "Payments V2 Initiation Error 401 Response Body (Initiation, Status)",
+                  "x-tags": [
+                    "Payments Initiation"
+                  ]
+                },
+                "examples": {
+                  "example-1": {
+                    "value": {
+                      "apiName": "GET/payments/v2/payment-initiations/status",
+                      "reason": {
+                        "reasonCode": 401,
+                        "reasonDescription": "Authentication Failure"
+                      },
+                      "status": "Failure",
+                      "transactionIdentification": "99999990-9999-9999-9999-009099999999"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "description": "Payments V2 Status",
+        "parameters": [
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "header",
+            "name": "TransactionIdentification",
+            "description": "Bank assigned identifier for the payment at the transaction level Length: 1-36",
+            "required": true
+          }
+        ],
+        "tags": [
+          "Payments",
+          "Status"
+        ]
+      }
+    }
+  },
+  "components": {
+    "schemas": {},
+    "securitySchemes": {}
+  }
+}
