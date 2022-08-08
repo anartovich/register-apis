@@ -41,7 +41,7 @@ jobs:
           echo $(jq '.name = $ENV.API_NAME' config/API-config.json) > config/API-config.json
           export PATH_NAME="/demoapi/v1/${API_NAME//[!a-z,!A-Z]}"
           echo $(jq '.path = $ENV.PATH_NAME' config/API-config.json) > config/API-config.json
-          export HOST="http://localhost:$PORT"
+          export HOST="http://localhost:$PORT/"
           echo $(jq '.backendBasepath = $ENV.HOST' config/API-config.json) > config/API-config.json
           export USER=$(jq -r '.apiadmin' config/script-config.json)
           export APIMANAGER=$(jq -r '.apimanager' config/script-config.json)

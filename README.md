@@ -35,9 +35,9 @@ Follow these steps to use this project:
 
    
 
-8. Click the **Action** tab. You will need to click the Enable actions link. 
+8. Click the **Action** tab. You will need to click the **I understand my workflows, go ahead and enable them** link. 
 
-9. Select **Deploy to APIM**. Click **Run workflow**. The action will prompt you for an input parameters: git branch. You can accept the default values and click Run workflow in the pop-up window.
+9. Select **Deploy to APIM**. Click **Run workflow**. The action will prompt you for an input parameters: git branch. You can accept the default values and click **Run workflow** in the pop-up window.
 
    
 
@@ -45,9 +45,8 @@ Follow these steps to use this project:
 
    
    
-
    
-
+   
 10. GitHub executes this action in a container on its cloud. It will take a minute or so to complete. Come back to this page later and check the status. If the action is successful, you should see a green checkmark (like in the image above). 
 
    Note: If the same API already registered in your API Manager, the deployment of that API will fail. You may modify the `.github/workflows/main.yml` and add the **-force** parameter at the end of the `apim-cli-$ENV.CLI-RELEASE/scripts/apim.sh` command
