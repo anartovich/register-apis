@@ -33,19 +33,32 @@ jobs:
     - name: Import API into API Manager
       run: |
         FILES=$(ls -S APIs/mocked/*.json)
+        
+        # The PORT is on which a mocked API will be listening
+
         PORT=4010
+
+        # Looping through all files in the *APIs/mocked* folder and deploy them to the target API Manager
 
         for FILE_NAME in $FILES
         do
+          # Parse an API spec and update API configuration file using the API name, path and backendBasepath
+
           export API_NAME=$(jq -r .info.title $FILE_NAME)
           echo $(jq '.name = $ENV.API_NAME' config/API-config.json) > config/API-config.json
           export PATH_NAME="/demoapi/v1/${API_NAME//[!a-z,!A-Z]}"
           echo $(jq '.path = $ENV.PATH_NAME' config/API-config.json) > config/API-config.json
           export HOST="http://localhost:$PORT/"
           echo $(jq '.backendBasepath = $ENV.HOST' config/API-config.json) > config/API-config.json
+
+          # Remove the securitySchemas section to simplify the outbound security configuration for mocking this API
+
+          echo $(cat $FILE_NAME | jq 'del(.components.securitySchemes)') > $FILE_NAME
+
+          # Parse *apiadmin* user ID and *API Manager URL* to be used with the APIM_CLI tool
+
           export USER=$(jq -r '.apiadmin' config/script-config.json)
           export APIMANAGER=$(jq -r '.apimanager' config/script-config.json)
-          echo $(cat $FILE_NAME | jq 'del(.components.securitySchemes)') > $FILE_NAME
         
           apim-cli-${{ env.CLI_RELEASE }}/scripts/apim.sh api import -a $FILE_NAME -c config/API-config.json -apimanagerUrl $APIMANAGER -u $USER -p ${{ secrets.APIADMIN_PWD }}
           (( PORT = PORT + 1 ))
