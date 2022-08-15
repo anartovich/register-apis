@@ -1,6 +1,6 @@
 # Register APIs in Axway API Manager
 
-This project enables you to quickly deploy/register APIs of your choice to Axway API Manager and mock their output by using [Stoplight Prizm server](https://stoplight.io/open-source/prism). The APIs must be provided in the *./APIs* folder as OAS specifications in JSON format.
+This project enables you to quickly deploy/register APIs of your choice to Axway API Manager and mock their output (if needed) by using [Stoplight Prism server](https://stoplight.io/open-source/prism). The APIs must be provided in the *./APIs* folder as OAS specifications in JSON format.
 
 ## Requirements
 
@@ -10,6 +10,11 @@ These are the requirements to successfully use this project:
 - API Manager URL has to be accessible from Internet
 - Docker installed (Docker version 20.10.17 was tested)
 - Git installed
+- API specs Swagger v2 or OAS v3 in JSON format with the 'Dereferenced' references (as shown in Stoplight Studio)
+
+  
+
+<img src="images/export-api.png" style="zoom:50%;" />
 
 ## Running this project
 
@@ -19,7 +24,7 @@ Follow these steps to use this project:
 
 2. Clone it to your machine where you run Axway API Management. FYI, for our testing we've used CentOS 7 machine with Axway API Management v.7.7.20220530 installed. 
 
-3. Add your API specs in JSON format to the *./APIs* folder
+3. Add your API specs in JSON format to either `./APIs/mocked` or `./APIs/live` folder. It will depends on what would be a backend server: *mocked* (with Prism server) or *live* (pointing to the live URL)
 
 4. Modify the *`./config/script-config.json`* file with API Manager URL and user ID that has permissions to register APIs
 

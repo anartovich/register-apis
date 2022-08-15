@@ -14,12 +14,19 @@ if [ "$ACTION" = "q" ] || [ "$ACTION" = "Q" ]; then
     exit 0;
 fi
 
-FILES=$(ls -S APIs/*.json)
+FILES=$(ls -S APIs/mocked/*.json)
 PORT=4010
+
+if [ ! -d "processed/APIs/mocked" ]; then
+    mkdir -p processed/APIs/mocked
+elif
+    rm processed/APIs/mocked/*
+fi
+    
 
 for FILE_NAME in $FILES
 do
-    echo $(cat $FILE_NAME | jq 'del(.components.securitySchemes)') > $FILE_NAME
-    docker run --init -d --rm -v $(pwd):/tmp -p $PORT:4010 stoplight/prism:4.10.1 mock -d -h 0.0.0.0 "/tmp/$FILE_NAME"
+    echo $(cat $FILE_NAME | jq 'del(.components.securitySchemes)') > processed/$FILE_NAME
+    docker run --init -d --rm -v $(pwd)/processed:/tmp -p $PORT:4010 stoplight/prism:4.10.1 mock -d -h 0.0.0.0 "/tmp/$FILE_NAME"
     (( PORT = PORT + 1 ))
 done
