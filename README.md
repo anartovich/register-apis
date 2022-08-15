@@ -26,13 +26,13 @@ Follow these steps to use this project:
 
 3. Add your API specs in JSON format to `./APIs/mocked` folder. 
 
-4. Modify the *`./config/script-config.json`* file with API Manager URL and user ID that has permissions to register APIs
+4. Modify the *`./config/script-config.json`* file by replacing the default API Manager URL and `apiadmin` user ID (this user must have permissions to register APIs)
 
 5. Modify **organization** value in the `./config/API-config.json` file if needed. The default organization where the APIs will be installed is *API Development*.
 
 6. Push these updates to your repo
 
-7. Access your project in github.com and add a password variable **APIADMIN_PWD** (it must be this name) to your project (*Settings -> Secrets -> Actions*). This is a safe way for providing sensitive information for using in GitHub Actions.
+7. Access your project in github.com and add a password variable **APIADMIN_PWD** (it must be this name) to your project (***Settings > Secrets > Actions***). This is a safe way for providing sensitive information for using in GitHub Actions.
 
    
 
@@ -69,6 +69,6 @@ Follow these steps to use this project:
 
     
 
-14. This script will deploy multiple containers of Prizm mocking server on your machine: one per API spec in the *`./APIs`* folder. The containers use one port per container starting with 4010.
+14. This script will deploy multiple containers of the Prism mocking server on your machine: one per API spec in the `*./APIs*/mocked` folder. The containers use one port per container starting with 4010.
 
     **Note**: make sure that you have enough resources to run Axway APIM and multiple docker containers
