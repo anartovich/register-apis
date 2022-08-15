@@ -19,7 +19,7 @@ PORT=4010
 
 if [ ! -d "processed/APIs/mocked" ]; then
     mkdir -p processed/APIs/mocked
-elif
+else
     rm processed/APIs/mocked/*
 fi
     

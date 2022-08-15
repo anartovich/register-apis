@@ -24,7 +24,7 @@ Follow these steps to use this project:
 
 2. Clone it to your machine where you run Axway API Management. FYI, for our testing we've used CentOS 7 machine with Axway API Management v.7.7.20220530 installed. 
 
-3. Add your API specs in JSON format to either `./APIs/mocked` or `./APIs/live` folder. It will depends on what would be a backend server: *mocked* (with Prism server) or *live* (pointing to the live URL)
+3. Add your API specs in JSON format to `./APIs/mocked` folder. 
 
 4. Modify the *`./config/script-config.json`* file with API Manager URL and user ID that has permissions to register APIs
 
