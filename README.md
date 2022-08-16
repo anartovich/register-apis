@@ -26,13 +26,13 @@ Follow these steps to use this project:
 
 3. Add your API specs in JSON format to `./APIs/mocked` folder. 
 
-4. Modify the *`./config/script-config.json`* file by replacing the default API Manager URL and `apiadmin` user ID (this user must have permissions to register APIs)
+4. Modify the *`./config/script-config.json`* file by editing the default API Manager URL and `apiadmin` user ID (this user must have permissions to register APIs) with values for your target environment.
 
 5. Modify **organization** value in the `./config/API-config.json` file if needed. The default organization where the APIs will be installed is *API Development*.
 
 6. Push these updates to your repo
 
-7. Access your project in github.com and add a password variable **APIADMIN_PWD** (it must be this name) to your project (***Settings > Secrets > Actions***). This is a safe way for providing sensitive information for using in GitHub Actions.
+7. Access your project in *github.com* and add a password variable **APIADMIN_PWD** (it must be this name) to your project (***Settings > Secrets > Actions***). This is a safe way for providing sensitive information for using in GitHub Actions.
 
    
 
@@ -52,13 +52,13 @@ Follow these steps to use this project:
    
    
    
-10. GitHub executes this action in a container on its cloud. It will take a minute or so to complete. Come back to this page later and check the status. If the action is successful, you should see a green checkmark (like in the image above). 
+10. GitHub executes this action in a container on its cloud. It will take a minute or so to complete. Come back to this page later and check the status. If the action is successful, you should see a green checkmark (like in the image above). If the workflow fails, you will need to click it in the *workflow runs* pane and review the logs. Correct an issue and re-run the workflow. FYI, Visual Studio Code has a nice plug-in to work with [GitHub Actions](https://marketplace.visualstudio.com/items?itemName=cschleiden.vscode-github-actions).
 
    Note: If the same API already registered in your API Manager, the deployment of that API will fail. You may modify the `.github/workflows/main.yml` and add the **-force** parameter at the end of the `apim-cli-$ENV.CLI-RELEASE/scripts/apim.sh` command
 
 11. Connect to your API Manager to confirm that APIs are registered.
 
-12. Now, go back to your Linux machine where you've installed Axway API Management and switch to your git repo folder.
+12. Now, go back to your Linux machine where you have Axway API Management and git repo. Switch to your git repo folder.
 
 13. Execute the following commands from within this folder
 
@@ -67,8 +67,14 @@ Follow these steps to use this project:
     $ ./post-run-task.sh
     ```
 
-    
-
 14. This script will deploy multiple containers of the Prism mocking server on your machine: one per API spec in the `*./APIs*/mocked` folder. The containers use one port per container starting with 4010.
 
     **Note**: make sure that you have enough resources to run Axway APIM and multiple docker containers
+
+15. Test your APIs. The mocked data will return the "lorem ipsum" data unless you create your data models with the specific data type (like date or enum) and/or [x-faker tags](https://fakerjs.dev/guide/) to "help" Prism in generating more realistic data.
+
+    Another option is to use examples if you have them in your API spec files. To use this option, you need to modify the `post-run-task.sh` script. Remove the second `-d` option from the `docker` command:
+
+    <img src="images/modify-docker-cmd.png" style="zoom: 67%;" />
+
+    
