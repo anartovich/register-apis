@@ -13,7 +13,7 @@ These are the requirements to successfully use this project:
 - API specs Swagger v2 or OAS v3 in JSON format with the 'Dereferenced' references (as shown in Stoplight Studio)
 
 
-   <img src="images/export-api.png" style="zoom:50%;" />
+   <img src="images/export-api.png" style="zoom:35%;" />
 
 
 ## Running this project
