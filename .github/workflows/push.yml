@@ -63,6 +63,6 @@ jobs:
           export USER=$(jq -r '.apiadmin' config/script-config.json)
           export APIMANAGER=$(jq -r '.apimanager' config/script-config.json)
         
-          apim-cli-${{ env.CLI_RELEASE }}/scripts/apim.sh api import -a $FILE_NAME -c config/API-config.json -apimanagerUrl $APIMANAGER -u $USER -p ${{ secrets.APIADMIN_PWD }}
+          apim-cli-${{ env.CLI_RELEASE }}/scripts/apim.sh api import -a $FILE_NAME -c config/API-config.json -apimanagerUrl https://${{env.API_HOST}}:8075 -u $USER -p ${{ secrets.APIADMIN_PWD }}
           (( PORT = PORT + 1 ))
         done
