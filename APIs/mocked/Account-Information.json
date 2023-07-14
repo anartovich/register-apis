@@ -8,13 +8,13 @@
     "version": "1.0",
     "description": "Account Information\nThis API will allow you to query account information for a specific user.",
     "contact": {
-      "name": "Leor Brenman",
-      "email": "lbrenman99@hotmail.com",
-      "url": "https://www.leorbrenman.com"
+      "name": "John Doe",
+      "email": "jdoe@axway.com",
+      "url": "https://www.axway.com"
     },
     "license": {
-      "url": "https://www.leorbrenman.com",
-      "name": "NA"
+      "url": "https://www.apache.org/licenses/LICENSE-2.0.html",
+      "name": "Apache 2.0"
     },
     "termsOfService": "NA"
   },
@@ -107,12 +107,12 @@
                         "balances": [
                           {
                             "amount": "983.97",
-                            "lastUpdatedDate": "2017-07-04",
-                            "transactionCode": "010",
+                            "lastUpdatedDate": "2023-07-04",
+                            "transactionCode": "5468",
                             "transactionDescription": "Opening Ledger Balance"
                           }
                         ],
-                        "bankId": "BOFAGB22",
+                        "bankId": "BOFAFRPP",
                         "currency": "EUR"
                       }
                     }
@@ -124,12 +124,12 @@
                         "balances": [
                           {
                             "amount": "21,332.11",
-                            "lastUpdatedDate": "2021-07-04",
-                            "transactionCode": "010",
+                            "lastUpdatedDate": "2023-07-04",
+                            "transactionCode": "2541",
                             "transactionDescription": "Opening Ledger Balance"
                           }
                         ],
-                        "bankId": "BOFAGB22",
+                        "bankId": "BOFAFRPP",
                         "currency": "USD"
                       }
                     }
