@@ -6,7 +6,7 @@
   "info": {
     "title": "Account Information",
     "version": "1.0",
-    "description": "Account Information:\nThis API will allow you to query account information for a specific user.",
+    "description": "Account Information - Cradlepoint demo:\nThis API will allow you to query account information for a specific user.",
     "contact": {
       "name": "John Doe",
       "email": "jdoe@axway.com",
