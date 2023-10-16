@@ -533,7 +533,7 @@
                       }
                     },
                     "requestId": {
-                      "type": "null"
+                      "type": "string"
                     },
                     "rfiId": {
                       "type": "string"
