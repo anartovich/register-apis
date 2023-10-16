@@ -11,7 +11,7 @@ on:
 
 env:
   CLI_RELEASE: 1.14.2
-  managerURL:
+  APIMANAGER: "${{ github.event.inputs.managerURL }}"
     
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
@@ -60,7 +60,7 @@ jobs:
 
           export USER=$(jq -r '.apiadmin' config/script-config.json)
           # export APIMANAGER=$(jq -r '.apimanager' config/script-config.json)
-          APIMANAGER="${{ github.event.inputs.managerURL }}"
+          #APIMANAGER="${{ github.event.inputs.managerURL }}"
         
           apim-cli-${{ env.CLI_RELEASE }}/scripts/apim.sh api import -a $FILE_NAME -c config/API-config.json -apimanagerUrl $APIMANAGER -u $USER -p ${{ secrets.APIADMIN_PWD }}
           (( PORT = PORT + 1 ))
