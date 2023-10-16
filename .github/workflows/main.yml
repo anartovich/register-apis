@@ -10,7 +10,7 @@ on:
 # Environment variables that may be used in all jobs
 
 env:
-  CLI_RELEASE: 1.12.1
+  CLI_RELEASE: 1.14.2
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
@@ -58,7 +58,8 @@ jobs:
           # Parse *apiadmin* user ID and *API Manager URL* to be used with the APIM_CLI tool
 
           export USER=$(jq -r '.apiadmin' config/script-config.json)
-          export APIMANAGER=$(jq -r '.apimanager' config/script-config.json)
+          # export APIMANAGER=$(jq -r '.apimanager' config/script-config.json)
+          APIMANAGER="${{ github.event.inputs.managerURL }}"
         
           apim-cli-${{ env.CLI_RELEASE }}/scripts/apim.sh api import -a $FILE_NAME -c config/API-config.json -apimanagerUrl $APIMANAGER -u $USER -p ${{ secrets.APIADMIN_PWD }}
           (( PORT = PORT + 1 ))
