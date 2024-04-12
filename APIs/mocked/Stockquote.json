@@ -3,7 +3,7 @@
   "info": {
       "description": "This is a stockquote sample API",
       "version": "1.1",
-      "title": "Stockquote",
+      "title": "Rockwell Stockquote",
       "x-summary": "Get stock quote",
       "contact": {
           "name": "axway",
