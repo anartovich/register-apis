@@ -1,7 +1,7 @@
 {
     "openapi": "3.0.0",
     "info": {
-        "title": "Devices",
+        "title": "Rockwell Devices",
         "version": "1.0",
         "description": "<span style=\"font-size: 3em; color: #5D535E;\">\n <i class=\"fas fa-robot fa-2x\"></i> <i>CloudHome\n</i></span> \n</br>\n</br>\n\nInteract with the `'Devices'` API to get a list of registered devices, add or remove devices and to update existing records.\n\nUse this API to leverage __*CloudHome*__'s central repository of devices that allow's users to manage automation systems at home, at work or on the go.",
         "contact": {
