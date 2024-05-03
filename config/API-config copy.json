@@ -1,0 +1,27 @@
+{
+   "name": "Test API",
+   "path": "/demoapi/v1",
+   "state": "published",
+   "retirementDate": "01.09.2050",
+   "version": "1.0.0",
+   "organization": "API Development",
+   "backendBasepath": "http://localhost:4010",
+   "securityProfiles": [
+      {
+         "name": "_default",
+         "isDefault": true,
+         "devices": [
+            {
+               "name": "API Key",
+               "type": "apiKey",
+               "order": 1,
+               "properties": {
+                  "apiKeyFieldName": "KeyId",
+                  "takeFrom": "HEADER",
+                  "removeCredentialsOnSuccess": true
+               }
+            }
+         ]
+      }
+   ]
+}
