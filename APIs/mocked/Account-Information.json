@@ -4,9 +4,9 @@
     "id": "hblgdd394cli2"
   },
   "info": {
-    "title": "Air Force Account Information",
+    "title": "Lululemon Account Information",
     "version": "1.0",
-    "description": "Account Information - Air Force demo:\nThis API will allow you to query account information for a specific user.",
+    "description": "Account Information - Lululemon demo:\nThis API will allow you to query account information for a specific user.",
     "contact": {
       "name": "John Doe",
       "email": "jdoe@axway.com",
