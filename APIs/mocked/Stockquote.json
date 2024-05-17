@@ -3,7 +3,7 @@
   "info": {
       "description": "This is a stockquote sample API",
       "version": "1.1",
-      "title": "Lululemon Stockquote",
+      "title": "HMSA Stockquote",
       "x-summary": "Get stock quote",
       "contact": {
           "name": "axway",
