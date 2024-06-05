@@ -1,0 +1,38 @@
+{
+   "name": "Test API",
+   "path": "/demoapi/v1",
+   "state": "published",
+   "version": "1.0.0",
+   "organization": "API Development",
+   "backendBasepath": "https://backend.server.com",
+   "securityProfiles": [
+      {
+         "name": "_default",
+         "isDefault": true,
+         "devices": [
+            {
+               "type": "oauth",
+               "name": "OAuth",
+               "order": 1,
+               "properties": {
+                  "scopesMustMatch": "Any",
+                  "removeCredentialsOnSuccess": true,
+                  "authorizationHeaderPrefix": "Bearer",
+                  "authCodeGrantTypeRequestSecretName": "client_secret",
+                  "authCodeGrantTypeEnabled": true,
+                  "authCodeGrantTypeTokenEndpointTokenName": "access_code",
+                  "tokenStore": "OAuth Access Token Store",
+                  "authCodeGrantTypeRequestClientIdName": "client_id",
+                  "implicitGrantLoginTokenName": "access_token",
+                  "authCodeGrantTypeRequestEndpointUrl": "https://oauth.server.com:8181/api/oauth/authorize",
+                  "authCodeGrantTypeTokenEndpointUrl": "https://oauth.server.com:8181/api/oauth/token",
+                  "implicitGrantLoginEndpointUrl": "https://oauth.server.com:8181/api/oauth/authorize",
+                  "accessTokenLocation": "HEADER",
+                  "scopes": "resource.WRITE, resource.READ",
+                  "implicitGrantEnabled": true
+               }
+            }
+         ]
+      }
+   ]
+}
